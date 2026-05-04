@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英文名詞子句 × 間接問句 互動測驗</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --paper: #faf6ef;
+    --cream: #f0e9d8;
+    --gold: #c8962a;
+    --gold-light: #e8b94a;
+    --red: #b83232;
+    --green: #2a7a4a;
+    --blue: #1e4a8a;
+    --shadow: rgba(26,18,9,0.12);
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–paper);
+color: var(–ink);
+font-family: ‘Noto Serif TC’, serif;
+min-height: 100vh;
+background-image:
+radial-gradient(ellipse at 20% 10%, rgba(200,150,42,0.06) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 90%, rgba(30,74,138,0.05) 0%, transparent 50%),
+url(“data:image/svg+xml,%3Csvg width=‘60’ height=‘60’ viewBox=‘0 0 60 60’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cg fill=‘none’ fill-rule=‘evenodd’%3E%3Cg fill=’%23c8962a’ fill-opacity=‘0.03’%3E%3Cpath d=‘M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z’/%3E%3C/g%3E%3C/g%3E%3C/svg%3E”);
+}
+
+/* HEADER */
+header {
+text-align: center;
+padding: 56px 24px 40px;
+position: relative;
+border-bottom: 1px solid rgba(200,150,42,0.3);
+}
+header::before {
+content: ‘’;
+display: block;
+width: 80px;
+height: 3px;
+background: var(–gold);
+margin: 0 auto 24px;
+}
+.header-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 12px;
+}
+h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(28px, 5vw, 52px);
+font-weight: 700;
+line-height: 1.15;
+color: var(–ink);
+margin-bottom: 12px;
+}
+h1 em {
+font-style: italic;
+color: var(–gold);
+}
+.subtitle {
+font-size: 14px;
+color: #6b5b3e;
+margin-bottom: 24px;
+}
+
+/* PROGRESS */
+.progress-bar-wrap {
+max-width: 500px;
+margin: 0 auto;
+background: var(–cream);
+border-radius: 999px;
+height: 6px;
+overflow: hidden;
+border: 1px solid rgba(200,150,42,0.2);
+}
+.progress-bar {
+height: 100%;
+background: linear-gradient(90deg, var(–gold), var(–gold-light));
+border-radius: 999px;
+transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+width: 0%;
+}
+.progress-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+color: var(–gold);
+margin-top: 8px;
+letter-spacing: 1px;
+}
+
+/* SCORE BADGE */
+.score-display {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: var(–cream);
+border: 1px solid rgba(200,150,42,0.3);
+border-radius: 999px;
+padding: 6px 18px;
+font-family: ‘DM Mono’, monospace;
+font-size: 13px;
+color: var(–ink);
+margin-top: 16px;
+}
+.score-display span { color: var(–gold); font-weight: 500; }
+
+/* MAIN */
+main {
+max-width: 760px;
+margin: 0 auto;
+padding: 40px 20px 80px;
+}
+
+/* QUESTION CARD */
+.question-card {
+background: #fff;
+border-radius: 2px;
+border: 1px solid rgba(200,150,42,0.2);
+box-shadow: 0 4px 24px var(–shadow), 0 1px 3px var(–shadow);
+margin-bottom: 32px;
+overflow: hidden;
+animation: slideIn 0.5s cubic-bezier(0.34,1.3,0.64,1) both;
+display: none;
+}
+.question-card.active { display: block; }
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-header {
+background: var(–cream);
+border-bottom: 1px solid rgba(200,150,42,0.2);
+padding: 16px 28px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.q-number {
+font-family: ‘Playfair Display’, serif;
+font-size: 36px;
+font-weight: 700;
+color: var(–gold);
+line-height: 1;
+}
+.q-tag {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+color: #8a7250;
+background: rgba(200,150,42,0.1);
+border-radius: 2px;
+padding: 3px 8px;
+text-transform: uppercase;
+}
+
+.card-body { padding: 28px 28px 24px; }
+.question-text {
+font-size: 17px;
+line-height: 1.8;
+color: var(–ink);
+margin-bottom: 24px;
+}
+.blank {
+display: inline-block;
+width: 90px;
+border-bottom: 2px solid var(–ink);
+text-align: center;
+font-family: ‘DM Mono’, monospace;
+color: var(–gold);
+font-weight: 500;
+vertical-align: bottom;
+margin: 0 4px;
+min-height: 22px;
+transition: all 0.3s;
+}
+
+/* OPTIONS */
+.options-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 8px;
+}
+@media (max-width: 480px) { .options-grid { grid-template-columns: 1fr; } }
+
+.option-btn {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 14px 18px;
+background: var(–paper);
+border: 1.5px solid rgba(200,150,42,0.25);
+border-radius: 2px;
+cursor: pointer;
+font-family: ‘Noto Serif TC’, serif;
+font-size: 15px;
+color: var(–ink);
+transition: all 0.2s;
+text-align: left;
+}
+.option-btn:hover:not(:disabled) {
+background: var(–cream);
+border-color: var(–gold);
+transform: translateX(3px);
+}
+.option-letter {
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+font-weight: 500;
+color: var(–gold);
+background: rgba(200,150,42,0.12);
+border-radius: 2px;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+.option-btn.correct {
+background: #edf8f1;
+border-color: var(–green);
+color: var(–green);
+}
+.option-btn.correct .option-letter {
+background: var(–green);
+color: #fff;
+}
+.option-btn.wrong {
+background: #fdf0f0;
+border-color: var(–red);
+color: var(–red);
+text-decoration: line-through;
+}
+.option-btn.wrong .option-letter {
+background: var(–red);
+color: #fff;
+}
+.option-btn.highlight {
+background: #edf8f1;
+border-color: var(–green);
+color: var(–green);
+}
+.option-btn.highlight .option-letter {
+background: var(–green);
+color: #fff;
+}
+.option-btn:disabled { cursor: default; }
+
+/* RESULT PANEL */
+.result-panel {
+display: none;
+margin-top: 20px;
+border-top: 1px solid var(–cream);
+padding-top: 20px;
+animation: fadeUp 0.4s ease both;
+}
+.result-panel.show { display: block; }
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.verdict {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 16px;
+font-weight: 600;
+margin-bottom: 16px;
+}
+.verdict-icon {
+font-size: 22px;
+line-height: 1;
+}
+.verdict.correct-v { color: var(–green); }
+.verdict.wrong-v   { color: var(–red); }
+
+.section-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 6px;
+margin-top: 14px;
+}
+.translation-box {
+background: var(–cream);
+border-left: 3px solid var(–gold);
+padding: 12px 16px;
+border-radius: 0 2px 2px 0;
+font-size: 15px;
+line-height: 1.7;
+color: #3a2d1a;
+margin-bottom: 4px;
+}
+.vocab-list {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin-top: 6px;
+}
+.vocab-chip {
+background: rgba(30,74,138,0.07);
+border: 1px solid rgba(30,74,138,0.18);
+border-radius: 2px;
+padding: 5px 12px;
+font-size: 13px;
+color: var(–blue);
+}
+.vocab-chip strong {
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+display: block;
+color: var(–blue);
+margin-bottom: 2px;
+}
+.analysis-box {
+background: #fafafa;
+border: 1px solid rgba(200,150,42,0.2);
+border-radius: 2px;
+padding: 14px 16px;
+font-size: 14px;
+line-height: 1.9;
+color: #2a2014;
+}
+.analysis-box .highlight-word {
+background: rgba(200,150,42,0.15);
+padding: 1px 5px;
+border-radius: 2px;
+font-family: ‘DM Mono’, monospace;
+font-size: 13px;
+color: var(–ink);
+}
+
+/* NEXT BUTTON */
+.next-btn {
+display: none;
+margin-top: 20px;
+padding: 13px 32px;
+background: var(–ink);
+color: var(–paper);
+font-family: ‘Noto Serif TC’, serif;
+font-size: 14px;
+letter-spacing: 1px;
+border: none;
+border-radius: 2px;
+cursor: pointer;
+transition: all 0.2s;
+position: relative;
+overflow: hidden;
+}
+.next-btn::after {
+content: ’ →’;
+font-family: ‘DM Mono’, monospace;
+}
+.next-btn:hover {
+background: var(–gold);
+color: var(–ink);
+transform: translateX(4px);
+}
+.next-btn.show { display: inline-block; }
+
+/* RESULT SCREEN */
+#result-screen {
+display: none;
+text-align: center;
+padding: 60px 20px;
+animation: slideIn 0.6s ease both;
+}
+#result-screen.show { display: block; }
+.result-trophy {
+font-size: 72px;
+margin-bottom: 24px;
+}
+.result-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 36px;
+font-weight: 700;
+color: var(–ink);
+margin-bottom: 8px;
+}
+.result-score-big {
+font-family: ‘Playfair Display’, serif;
+font-size: 72px;
+font-weight: 700;
+color: var(–gold);
+line-height: 1;
+margin: 16px 0;
+}
+.result-msg {
+font-size: 16px;
+color: #5a4a30;
+margin-bottom: 32px;
+line-height: 1.7;
+}
+.retry-btn {
+padding: 14px 40px;
+background: var(–gold);
+color: var(–ink);
+font-family: ‘Noto Serif TC’, serif;
+font-size: 15px;
+font-weight: 600;
+border: none;
+border-radius: 2px;
+cursor: pointer;
+transition: all 0.2s;
+letter-spacing: 1px;
+}
+.retry-btn:hover {
+background: var(–ink);
+color: var(–paper);
+transform: scale(1.03);
+}
+.result-table {
+max-width: 500px;
+margin: 32px auto;
+text-align: left;
+border-collapse: collapse;
+font-size: 14px;
+}
+.result-table th {
+background: var(–cream);
+padding: 10px 16px;
+border: 1px solid rgba(200,150,42,0.2);
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 2px;
+color: var(–gold);
+text-transform: uppercase;
+}
+.result-table td {
+padding: 10px 16px;
+border: 1px solid rgba(200,150,42,0.12);
+vertical-align: middle;
+}
+.result-table tr:nth-child(even) td { background: var(–paper); }
+.correct-mark { color: var(–green); font-size: 16px; }
+.wrong-mark   { color: var(–red);   font-size: 16px; }
+
+/* DECORATIVE */
+.deco-line {
+display: flex;
+align-items: center;
+gap: 12px;
+margin: 24px 0;
+opacity: 0.4;
+}
+.deco-line::before, .deco-line::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–gold);
+}
+.deco-line span {
+font-family: ‘DM Mono’, monospace;
+font-size: 14px;
+color: var(–gold);
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-label">Grammar Quiz · 文法測驗</div>
+  <h1>名詞子句 &amp; <em>間接問句</em></h1>
+  <p class="subtitle">Noun Clauses · Indirect Questions · 共 25 題</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0 / 25</div>
+  <div class="score-display">得分 <span id="liveScore">0</span> / <span id="liveDone">0</span></div>
+</header>
+
+<main id="quizArea">
+  <!-- Questions injected by JS -->
+</main>
+
+<div id="result-screen">
+  <div class="result-trophy" id="trophyEmoji">🏆</div>
+  <div class="result-title">測驗完成！</div>
+  <div class="result-score-big" id="finalScore"></div>
+  <div class="result-msg" id="finalMsg"></div>
+  <table class="result-table" id="resultTable">
+    <thead>
+      <tr><th>#</th><th>題目摘要</th><th>你的答案</th><th>正解</th><th>結果</th></tr>
+    </thead>
+    <tbody id="resultBody"></tbody>
+  </table>
+  <button class="retry-btn" onclick="restartQuiz()">🔄 重新測驗</button>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Willy found ______ the novel he bought last week was under his bed.",
+    options: ["that","where","whether","which"],
+    answer: 0,
+    tag: "名詞子句",
+    translation: "威利發現他上週買的那本小說在他的床下。",
+    vocab: [
+      { word: "novel", def: "小說（n.）" },
+      { word: "found", def: "發現（v.）find的過去式" }
+    ],
+    analysis: `<span class='highlight-word'>found</span> 後接名詞子句表示「發現某事」，子句內容為確定事實，用 <span class='highlight-word'>that</span> 引導。where（地點）、whether（是否）、which（哪個）皆不合語意。`
+  },
+  {
+    q: "Jacky would like to bring that poor dog back home, but he isn't sure ______ his mother likes dogs.",
+    options: ["how","what","whether","which"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "傑奇想把那隻可憐的狗帶回家，但他不確定他媽媽是否喜歡狗。",
+    vocab: [
+      { word: "whether", def: "是否（conj.）" },
+      { word: "isn't sure", def: "不確定（片語）" }
+    ],
+    analysis: `<span class='highlight-word'>isn't sure</span> 後接名詞子句，表「不確定是否…」，用 <span class='highlight-word'>whether</span>（= if）。how（如何）、what（什麼）、which（哪個）均不符合「是否」之語意。`
+  },
+  {
+    q: "A-fen: Yes, I'm not sure ______ we can still go fishing tomorrow.",
+    options: ["who","what","which","whether"],
+    answer: 3,
+    tag: "名詞子句",
+    translation: "阿芬：是啊，我不確定我們明天是否還能去釣魚。",
+    vocab: [
+      { word: "whether", def: "是否（conj.）" },
+      { word: "go fishing", def: "去釣魚（片語）" },
+      { word: "typhoon", def: "颱風（n.）" }
+    ],
+    analysis: `語境為颱風天，阿芬表示「不確定是否能去」，<span class='highlight-word'>I'm not sure</span> 後接名詞子句，用 <span class='highlight-word'>whether</span>（是否）。`
+  },
+  {
+    q: "Alice learned from the TV news ______ Nora Jones was coming to Taiwan the next day.",
+    options: ["that","where","which","whether"],
+    answer: 0,
+    tag: "名詞子句",
+    translation: "愛麗絲從電視新聞得知諾拉瓊斯隔天將來台灣。",
+    vocab: [
+      { word: "learned", def: "得知；學到（v.）" },
+      { word: "the next day", def: "隔天（片語）" }
+    ],
+    analysis: `<span class='highlight-word'>learned from the TV news</span> 後接名詞子句，說明得知的「內容」，內容是確定的新聞事實，用 <span class='highlight-word'>that</span> 引導。`
+  },
+  {
+    q: "I'm not sure if Kevin ______ this morning, but if he does, I'll tell him that you called. 【103教育會考】",
+    options: ["will come in","comes in","has come in","came in"],
+    answer: 1,
+    tag: "時態",
+    translation: "我不確定凱文今天早上是否會進來，但如果他來，我會告訴他你打過電話。",
+    vocab: [
+      { word: "come in", def: "進來；到達（片語動詞）" },
+      { word: "if", def: "是否；如果（conj.）" }
+    ],
+    analysis: `關鍵在後半句 <span class='highlight-word'>if he does</span>，does 為現在簡單式，與前面的 <span class='highlight-word'>comes in</span> 呼應，表達未來條件用現在式。此為【103教育會考】真題。`
+  },
+  {
+    q: "My father told me last night ______ we're going to the Food Festival this weekend. My brother and I felt very excited.",
+    options: ["whether","where","what","that"],
+    answer: 3,
+    tag: "名詞子句",
+    translation: "我父親昨晚告訴我們這週末要去美食節。我哥哥和我都感到非常興奮。",
+    vocab: [
+      { word: "Food Festival", def: "美食節（n.）" },
+      { word: "excited", def: "興奮的（adj.）" }
+    ],
+    analysis: `<span class='highlight-word'>told me</span> 後接名詞子句說明告知的「內容」，是確定的計畫，用 <span class='highlight-word'>that</span>。whether 表「不確定」，與語意不符。`
+  },
+  {
+    q: "I was surprised to know from the newspaper yesterday ______ flowers do not always smell sweet; some can smell like dead fish.",
+    options: ["that","when","where","which"],
+    answer: 0,
+    tag: "名詞子句",
+    translation: "我昨天從報紙得知，花朵並不總是香的；有些聞起來像死魚。",
+    vocab: [
+      { word: "surprised", def: "驚訝的（adj.）" },
+      { word: "smell like", def: "聞起來像（片語）" },
+      { word: "dead fish", def: "死魚（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>surprised to know</span> 後接名詞子句說明得知的內容，用 <span class='highlight-word'>that</span>。後面是陳述事實，不含疑問語氣。`
+  },
+  {
+    q: "Jerry wanted to know ______ he was kicked off the soccer team, but no one gave him a good reason.",
+    options: ["where","when","whether","why"],
+    answer: 3,
+    tag: "間接問句",
+    translation: "傑瑞想知道他為什麼被踢出足球隊，但沒有人給他一個好的理由。",
+    vocab: [
+      { word: "kick off", def: "踢出；開除（片語動詞）" },
+      { word: "reason", def: "理由；原因（n.）" },
+      { word: "soccer team", def: "足球隊（n.）" }
+    ],
+    analysis: `後半句 <span class='highlight-word'>no one gave him a good reason</span> 暗示他想知道的是「原因」，所以用 <span class='highlight-word'>why</span> 引導間接問句。`
+  },
+  {
+    q: "Do you know ______ the last bus leaves tonight?",
+    options: ["that","what time","whether","which"],
+    answer: 1,
+    tag: "間接問句",
+    translation: "你知道今晚最後一班公車幾點出發嗎？",
+    vocab: [
+      { word: "last bus", def: "末班公車（n.）" },
+      { word: "leave", def: "出發；離開（v.）" },
+      { word: "what time", def: "幾點（疑問詞片語）" }
+    ],
+    analysis: `詢問時間，用 <span class='highlight-word'>what time</span> 引導間接問句，語序須改為陳述句順序（what time + S + V）。`
+  },
+  {
+    q: "She didn't tell us ______ she would join the party or not.",
+    options: ["that","what","whether","who"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "她沒有告訴我們她是否會參加派對。",
+    vocab: [
+      { word: "join", def: "參加（v.）" },
+      { word: "party", def: "派對（n.）" },
+      { word: "whether...or not", def: "是否（固定用法）" }
+    ],
+    analysis: `<span class='highlight-word'>whether...or not</span> 是固定用法，表示「是否」。此句意思為「是否會參加」，whether 最合適，且 or not 更強化了不確定性。`
+  },
+  {
+    q: "I wonder ______ Tom passed the math exam.",
+    options: ["that","if","what","where"],
+    answer: 1,
+    tag: "名詞子句",
+    translation: "我很好奇湯姆是否通過了數學考試。",
+    vocab: [
+      { word: "wonder", def: "感到好奇；想知道（v.）" },
+      { word: "pass", def: "通過（v.）" },
+      { word: "math exam", def: "數學考試（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>wonder</span> 後接名詞子句，表示「不確定是否」，用 <span class='highlight-word'>if</span>（= whether）。that 用於確定內容，不合語意。`
+  },
+  {
+    q: "The teacher asked the students ______ they had finished their homework.",
+    options: ["that","what","whether","which"],
+    answer: 2,
+    tag: "間接問句",
+    translation: "老師問學生們是否已經完成了作業。",
+    vocab: [
+      { word: "asked", def: "詢問（v.）" },
+      { word: "finish", def: "完成（v.）" },
+      { word: "homework", def: "作業（n.）" }
+    ],
+    analysis: `ask 後接間接問句，詢問「是否已完成作業」，用 <span class='highlight-word'>whether</span> 引導。whether 可換成 if，但 whether 更常用於 ask 之後。`
+  },
+  {
+    q: "Nobody knows ______ the missing child is.",
+    options: ["that","where","whether","what"],
+    answer: 1,
+    tag: "間接問句",
+    translation: "沒有人知道那個失蹤的孩子在哪裡。",
+    vocab: [
+      { word: "nobody", def: "沒有人（pron.）" },
+      { word: "missing", def: "失蹤的（adj.）" },
+      { word: "child", def: "孩子（n.）" }
+    ],
+    analysis: `詢問「人的所在地點」，用 <span class='highlight-word'>where</span> 引導間接問句。語序為 where + S + V（陳述句語序）：where the child is。`
+  },
+  {
+    q: "Can you tell me ______ the nearest MRT station is?",
+    options: ["that","where","whether","who"],
+    answer: 1,
+    tag: "間接問句",
+    translation: "你能告訴我最近的捷運站在哪裡嗎？",
+    vocab: [
+      { word: "nearest", def: "最近的（adj.）" },
+      { word: "MRT station", def: "捷運站（n.）" }
+    ],
+    analysis: `詢問「地點」，用 <span class='highlight-word'>where</span> 引導間接問句。注意語序須為陳述句：where the station is（而非 where is the station）。`
+  },
+  {
+    q: "Scientists have discovered ______ some plants can feel pain.",
+    options: ["where","whether","that","which"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "科學家已經發現某些植物能感受到疼痛。",
+    vocab: [
+      { word: "discover", def: "發現（v.）" },
+      { word: "plant", def: "植物（n.）" },
+      { word: "pain", def: "疼痛（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>discovered</span> 後接名詞子句，說明「發現的內容」，是確定的科學事實，用 <span class='highlight-word'>that</span> 引導。`
+  },
+  {
+    q: "Kevin is trying to find out ______ he can get a scholarship.",
+    options: ["that","what","whether","where"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "凱文正在試圖查明他是否能獲得獎學金。",
+    vocab: [
+      { word: "find out", def: "查明；弄清楚（片語動詞）" },
+      { word: "scholarship", def: "獎學金（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>find out</span> 後表達「不確定是否能獲得獎學金」，用 <span class='highlight-word'>whether</span>（是否）。`
+  },
+  {
+    q: "I'm not sure ______ caused the accident.",
+    options: ["why","what","whether","which"],
+    answer: 1,
+    tag: "間接問句",
+    translation: "我不確定是什麼導致了這次事故。",
+    vocab: [
+      { word: "cause", def: "導致；造成（v.）" },
+      { word: "accident", def: "事故；意外（n.）" }
+    ],
+    analysis: `詢問「原因/事物」是什麼，用 <span class='highlight-word'>what</span> 引導間接問句。注意 what 在此作為主詞：what caused the accident。`
+  },
+  {
+    q: "The news report said ______ the storm would hit the coast on Friday.",
+    options: ["whether","what","that","which"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "新聞報導說暴風雨將於週五侵襲海岸。",
+    vocab: [
+      { word: "storm", def: "暴風雨（n.）" },
+      { word: "hit", def: "侵襲；打擊（v.）" },
+      { word: "coast", def: "海岸（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>said</span> 後接名詞子句說明「報導的內容」，是確定的預報，用 <span class='highlight-word'>that</span> 引導。`
+  },
+  {
+    q: "Please tell me ______ you will be able to attend the meeting.",
+    options: ["that","what","whether","why"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "請告訴我你是否能夠出席會議。",
+    vocab: [
+      { word: "attend", def: "出席；參加（v.）" },
+      { word: "meeting", def: "會議（n.）" },
+      { word: "be able to", def: "能夠（片語）" }
+    ],
+    analysis: `詢問「是否能出席」，用 <span class='highlight-word'>whether</span>。tell me + whether 表示說明者本身也不確定對方是否會來。`
+  },
+  {
+    q: "Do you have any idea ______ long it takes to fly from Taipei to Tokyo?",
+    options: ["how","what","that","whether"],
+    answer: 0,
+    tag: "間接問句",
+    translation: "你知道從台北飛到東京需要多長時間嗎？",
+    vocab: [
+      { word: "have any idea", def: "知道；了解（片語）" },
+      { word: "fly", def: "搭飛機（v.）" },
+      { word: "how long", def: "多長時間（疑問詞片語）" }
+    ],
+    analysis: `<span class='highlight-word'>how long</span> 是固定疑問詞片語，引導間接問句詢問「時間長度」。語序：how long it takes（陳述句語序）。`
+  },
+  {
+    q: "Linda didn't understand ______ her boss was so angry at the meeting.",
+    options: ["that","what","why","whether"],
+    answer: 2,
+    tag: "間接問句",
+    translation: "琳達不明白為什麼她的老闆在會議上如此憤怒。",
+    vocab: [
+      { word: "understand", def: "理解；明白（v.）" },
+      { word: "boss", def: "老闆（n.）" },
+      { word: "angry", def: "憤怒的（adj.）" }
+    ],
+    analysis: `<span class='highlight-word'>didn't understand</span> 後詢問「原因」，用 <span class='highlight-word'>why</span>。語序：why her boss was so angry（陳述句語序）。`
+  },
+  {
+    q: "The doctor explained ______ eating too much sugar could harm the body.",
+    options: ["whether","that","what","which"],
+    answer: 1,
+    tag: "名詞子句",
+    translation: "醫生解釋說吃太多糖可能對身體有害。",
+    vocab: [
+      { word: "explain", def: "解釋（v.）" },
+      { word: "harm", def: "傷害（v./n.）" },
+      { word: "sugar", def: "糖（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>explained</span> 後接名詞子句說明「解釋的內容」，內容為確定的醫學知識，用 <span class='highlight-word'>that</span> 引導。`
+  },
+  {
+    q: "I have no idea ______ the keys to my house are.",
+    options: ["that","where","whether","how"],
+    answer: 1,
+    tag: "間接問句",
+    translation: "我完全不知道我家鑰匙在哪裡。",
+    vocab: [
+      { word: "have no idea", def: "完全不知道（片語）" },
+      { word: "key", def: "鑰匙（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>have no idea</span> 後詢問「鑰匙的地點」，用 <span class='highlight-word'>where</span> 引導間接問句。語序：where the keys are（陳述句語序）。`
+  },
+  {
+    q: "It is surprising ______ the old bridge has survived for 300 years.",
+    options: ["whether","what","that","which"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "令人驚訝的是，這座古橋已經存在了300年。",
+    vocab: [
+      { word: "surprising", def: "令人驚訝的（adj.）" },
+      { word: "survive", def: "存活；存在（v.）" },
+      { word: "bridge", def: "橋（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>It is surprising that...</span> 是固定句型，that 引導名詞子句作真正主詞，It 為形式主詞。`
+  },
+  {
+    q: "The coach announced ______ the team had won the championship.",
+    options: ["whether","where","that","which"],
+    answer: 2,
+    tag: "名詞子句",
+    translation: "教練宣布球隊贏得了冠軍。",
+    vocab: [
+      { word: "announce", def: "宣布（v.）" },
+      { word: "championship", def: "冠軍；錦標賽（n.）" },
+      { word: "coach", def: "教練（n.）" }
+    ],
+    analysis: `<span class='highlight-word'>announced</span> 後接名詞子句說明「宣布的內容」，是確定的好消息，用 <span class='highlight-word'>that</span> 引導。`
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let userAnswers = [];
+let answered = [];
+
+function buildQuiz() {
+  const main = document.getElementById('quizArea');
+  main.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card' + (i === 0 ? ' active' : '');
+    card.id = `card-${i}`;
+
+    const letters = ['A','B','C','D'];
+    const optHtml = q.options.map((opt, j) => `
+      <button class="option-btn" id="opt-${i}-${j}" onclick="selectAnswer(${i}, ${j})" data-q="${i}" data-opt="${j}">
+        <span class="option-letter">${letters[j]}</span>
+        <span>${opt}</span>
+      </button>
+    `).join('');
+
+    const vocabHtml = q.vocab.map(v => `
+      <div class="vocab-chip"><strong>${v.word}</strong>${v.def}</div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="q-number">${String(i+1).padStart(2,'0')}</div>
+        <div class="q-tag">${q.tag}</div>
+      </div>
+      <div class="card-body">
+        <div class="question-text">${formatQuestion(q.q)}</div>
+        <div class="options-grid">${optHtml}</div>
+        <div class="result-panel" id="result-${i}">
+          <div class="verdict" id="verdict-${i}"></div>
+          <div class="section-label">中文翻譯</div>
+          <div class="translation-box">${q.translation}</div>
+          <div class="section-label">必備單字</div>
+          <div class="vocab-list">${vocabHtml}</div>
+          <div class="section-label">詳細解析</div>
+          <div class="analysis-box">${q.analysis}</div>
+        </div>
+        <button class="next-btn" id="next-${i}" onclick="nextQuestion(${i})">
+          ${i < questions.length - 1 ? '下一題' : '查看結果'}
+        </button>
+      </div>
+    `;
+    main.appendChild(card);
+  });
+}
+
+function formatQuestion(text) {
+  return text.replace(/______/g, '<span class="blank" id="blankFill">______</span>');
+}
+
+function selectAnswer(qi, optIdx) {
+  if (answered[qi]) return;
+  answered[qi] = true;
+  userAnswers[qi] = optIdx;
+
+  const correct = questions[qi].answer;
+  const letters = ['A','B','C','D'];
+
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById(`opt-${qi}-${j}`);
+    btn.disabled = true;
+    if (j === correct) btn.classList.add('correct');
+    else if (j === optIdx && optIdx !== correct) btn.classList.add('wrong');
+  }
+
+  // Fill blank
+  const card = document.getElementById(`card-${qi}`);
+  const blank = card.querySelector('.blank');
+  if (blank) {
+    blank.textContent = questions[qi].options[correct];
+    blank.style.borderColor = optIdx === correct ? 'var(--green)' : 'var(--red)';
+    blank.style.color = optIdx === correct ? 'var(--green)' : 'var(--red)';
+  }
+
+  if (optIdx === correct) score++;
+
+  const verdict = document.getElementById(`verdict-${qi}`);
+  if (optIdx === correct) {
+    verdict.className = 'verdict correct-v';
+    verdict.innerHTML = `<span class='verdict-icon'>✅</span> 答對了！正確答案是 (${letters[correct]}) ${questions[qi].options[correct]}`;
+  } else {
+    verdict.className = 'verdict wrong-v';
+    verdict.innerHTML = `<span class='verdict-icon'>❌</span> 答錯了！正確答案是 (${letters[correct]}) ${questions[qi].options[correct]}`;
+  }
+
+  document.getElementById(`result-${qi}`).classList.add('show');
+  document.getElementById(`next-${qi}`).classList.add('show');
+
+  updateProgress();
+}
+
+function nextQuestion(qi) {
+  document.getElementById(`card-${qi}`).classList.remove('active');
+  if (qi + 1 < questions.length) {
+    document.getElementById(`card-${qi + 1}`).classList.add('active');
+    document.getElementById(`card-${qi + 1}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    showResult();
+  }
+}
+
+function updateProgress() {
+  const done = answered.filter(Boolean).length;
+  const pct = (done / questions.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${done} / ${questions.length}`;
+  document.getElementById('liveScore').textContent = score;
+  document.getElementById('liveDone').textContent = done;
+}
+
+function showResult() {
+  document.getElementById('quizArea').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.classList.add('show');
+
+  const pct = Math.round((score / questions.length) * 100);
+  document.getElementById('finalScore').textContent = `${score} / ${questions.length}`;
+
+  const letters = ['A','B','C','D'];
+  let msg = '';
+  let trophy = '';
+  if (pct >= 90) { msg = '太厲害了！你對名詞子句與間接問句掌握得非常好！🎉'; trophy = '🏆'; }
+  else if (pct >= 70) { msg = '表現不錯！再複習一下錯誤的題目，你會更進步的！📚'; trophy = '🥈'; }
+  else if (pct >= 50) { msg = '還有進步的空間，多複習 that / whether / 間接問句語序吧！💪'; trophy = '🥉'; }
+  else { msg = '別灰心！仔細閱讀每題解析，下次一定會更好！✨'; trophy = '📖'; }
+
+  document.getElementById('trophyEmoji').textContent = trophy;
+  document.getElementById('finalMsg').textContent = msg;
+
+  const tbody = document.getElementById('resultBody');
+  tbody.innerHTML = questions.map((q, i) => {
+    const ua = userAnswers[i];
+    const isCorrect = ua === q.answer;
+    const qShort = q.q.replace(/______/g, '___').substring(0, 40) + '...';
+    return `<tr>
+      <td style="font-family:'DM Mono',monospace;color:var(--gold)">${i+1}</td>
+      <td>${qShort}</td>
+      <td style="font-family:'DM Mono',monospace">${ua !== undefined ? '(' + letters[ua] + ') ' + q.options[ua] : '未作答'}</td>
+      <td style="font-family:'DM Mono',monospace">(${letters[q.answer]}) ${q.options[q.answer]}</td>
+      <td class="${isCorrect ? 'correct-mark' : 'wrong-mark'}">${isCorrect ? '✓' : '✗'}</td>
+    </tr>`;
+  }).join('');
+
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function restartQuiz() {
+  score = 0;
+  userAnswers = [];
+  answered = [];
+  document.getElementById('result-screen').classList.remove('show');
+  document.getElementById('quizArea').style.display = '';
+  buildQuiz();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+updateProgress();
+</script>
+
+</body>
+</html>
